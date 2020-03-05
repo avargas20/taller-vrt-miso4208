@@ -3,10 +3,12 @@ function randomPalette(){
 
   for(var i=0; i<5;i++){
     color = Math.floor(Math.random() * 360)/360;
-    rgb = hslToRgb(color,0.5,0.5);
-    colors.push(rgbToHex(Math.floor(rgb[0]),Math.floor(rgb[1]),Math.floor(rgb[2])));
+    rgb = hslToRgb(color,0.8,0.5);
+    console.log(rgb)
+    colors.push("#"+rgbToHex(Math.floor(rgb[0]))+rgbToHex(Math.floor(rgb[1]))+rgbToHex(Math.floor(rgb[2])));
   }
 
+  setColors(colors);
   generateRules(colors);
 }
 
@@ -17,6 +19,14 @@ var rgbToHex = function (rgb) {
   }
   return hex;
 };
+
+function setColors(colors){
+  var element = document.querySelectorAll(".color-view");
+   
+    for(var i=0; i<element.length;i++){
+      element[i].style.backgroundColor = colors[i];
+    }
+}
 
 function generateRules(colors){
   var rules =".website-background{ color: "+colors[0]+";} \n"+
@@ -29,5 +39,7 @@ function generateRules(colors){
 
 function clean(){
   var colors = ["#FFFFFF","#FFFFFF","#FFFFFF","#FFFFFF","#FFFFFF"];
+  
+  setColors(colors);
   generateRules(colors);
 }
